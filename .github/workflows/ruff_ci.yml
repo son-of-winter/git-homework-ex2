@@ -1,0 +1,22 @@
+name: Ruff Linting
+
+on: [push, pull_request]  # Запускать при пуше и пулл-реквестах
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4  # Клонирует репозиторий
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"  # или ваша версия Python
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff linting
+        run: ruff check .  # Проверяет весь репозиторий
+        # Если нужно проверять только `git/src`:
+        # run: ruff check git/src/
